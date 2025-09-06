@@ -45,4 +45,3 @@ replay_*.log
 *.hprof
 *.jfr
 
-libs/

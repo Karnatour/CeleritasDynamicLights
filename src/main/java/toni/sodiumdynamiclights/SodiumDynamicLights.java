@@ -38,6 +38,7 @@ import org.apache.logging.log4j.LogManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.apache.logging.log4j.Logger;
+import org.taumc.celeritas.api.OptionGUIConstructionEvent;
 import toni.sodiumdynamiclights.accessor.WorldRendererAccessor;
 import toni.sodiumdynamiclights.config.CeleritasOptionsListener;
 import toni.sodiumdynamiclights.config.ConfigEventHandler;
@@ -92,6 +93,17 @@ public class SodiumDynamicLights {
             MinecraftForge.EVENT_BUS.register(new ConfigEventHandler());
             IReloadableResourceManager reloadableResourceManager = (IReloadableResourceManager) Minecraft.getMinecraft().getResourceManager();
             reloadableResourceManager.registerReloadListener(ItemLightSources::load);
+            if (Loader.isModLoaded("celeritas")) {
+                try {
+                    OptionGUIConstructionEvent.BUS.addListener(CeleritasOptionsListener::onCeleritasOptionsConstruct);
+                    System.out.println("[Celeritas Dynamic Lights] Successfully initialized Celeritas compatibility.");
+                } catch (Throwable t) {
+                    System.err.println("[Celeritas Dynamic Lights] Failed to initialize Celeritas compatibility.");
+                    t.printStackTrace();
+                }
+            } else {
+                System.out.println("[Celeritas Dynamic Lights] Celeritas not found, skipping compatibility features.");
+            }
         }
     }
 

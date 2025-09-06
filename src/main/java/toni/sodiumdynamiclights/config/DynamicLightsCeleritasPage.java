@@ -1,130 +1,105 @@
 package toni.sodiumdynamiclights.config;
 
 import com.google.common.collect.ImmutableList;
-
-import net.minecraft.util.text.ITextComponent;
+import org.embeddedt.embeddium.impl.gui.framework.TextComponent;
 import org.taumc.celeritas.api.options.OptionIdentifier;
 import org.taumc.celeritas.api.options.control.CyclingControl;
 import org.taumc.celeritas.api.options.control.TickBoxControl;
-import org.taumc.celeritas.api.options.structure.OptionFlag;
-import org.taumc.celeritas.api.options.structure.OptionGroup;
-import org.taumc.celeritas.api.options.structure.OptionImpl;
-import org.taumc.celeritas.api.options.structure.OptionPage;
-import org.taumc.celeritas.impl.gui.options.storage.SodiumOptionsStorage;
-import org.taumc.celeritas.impl.util.ComponentUtil;
+import org.taumc.celeritas.api.options.structure.*;
+import org.taumc.celeritas.impl.gui.MinecraftOptionsStorage;
 import toni.sodiumdynamiclights.DynamicLightsMode;
 import toni.sodiumdynamiclights.ExplosiveLightingMode;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DynamicLightsCeleritasPage{
-    public static final SodiumOptionsStorage mixinsOptionsStorage = new SodiumOptionsStorage();
+public class DynamicLightsCeleritasPage {
+
+    private static final MinecraftOptionsStorage optionsStorage = new MinecraftOptionsStorage();
 
     public static OptionPage celeritasDynamicLights() {
         final List<OptionGroup> groups = new ArrayList<>();
 
-        groups.add(OptionGroup.createBuilder()
-                .setId(ResourceLocations.COMMON)
-                .add(OptionImpl.createBuilder(DynamicLightsMode.class, mixinsOptionsStorage)
-                        .setId(ResourceLocations.OPTIONS_MODE)
-                        .setName(ComponentUtil.translatable("sodium.dynamiclights.options.mode"))
-                        .setTooltip(ComponentUtil.translatable("sodium.dynamiclights.options.mode.desc"))
-                        .setControl(option -> new CyclingControl<>(option, DynamicLightsMode.class, new ITextComponent[]{
-                                DynamicLightsMode.OFF.getTranslationComponent(),
-                                DynamicLightsMode.SLOW.getTranslationComponent(),
-                                DynamicLightsMode.FAST.getTranslationComponent(),
-                                DynamicLightsMode.REALTIME.getTranslationComponent()
-                        }))
-                        .setBinding((options, value) -> {
-                                    DynamicLightsConfig.dynamicLightsMode = value;
+        final String MOD_ID = "sodiumdynamiclights";
 
-                                },
+        groups.add(OptionGroup.createBuilder()
+                .setId(OptionIdentifier.create(MOD_ID, "common"))
+                .add(OptionImpl.createBuilder(DynamicLightsMode.class, optionsStorage)
+                        .setId(OptionIdentifier.create(MOD_ID, "mode", DynamicLightsMode.class))
+                        .setName(TextComponent.translatable("sodium.dynamiclights.options.mode"))
+                        .setTooltip(TextComponent.translatable("sodium.dynamiclights.options.mode.desc"))
+                        .setControl(option -> new CyclingControl<>(option, DynamicLightsMode.class, new TextComponent[]{
+
+                                TextComponent.translatable(DynamicLightsMode.OFF.getTranslationComponent().getKey()),
+                                TextComponent.translatable(DynamicLightsMode.SLOW.getTranslationComponent().getKey()),
+                                TextComponent.translatable(DynamicLightsMode.FAST.getTranslationComponent().getKey()),
+                                TextComponent.translatable(DynamicLightsMode.REALTIME.getTranslationComponent().getKey())
+                        }))
+                        .setBinding((options, value) -> DynamicLightsConfig.dynamicLightsMode = value,
                                 (options) -> DynamicLightsConfig.dynamicLightsMode)
                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                         .build())
-                .add(OptionImpl.createBuilder(boolean.class, mixinsOptionsStorage)
-                        .setId(ResourceLocations.OPTIONS_SELF)
-                        .setName(ComponentUtil.translatable("sodium.dynamiclights.options.self"))
-                        .setTooltip(ComponentUtil.translatable("sodium.dynamiclights.options.self.desc"))
+                .add(OptionImpl.createBuilder(Boolean.class, optionsStorage)
+                        .setId(OptionIdentifier.create(MOD_ID, "self", Boolean.class))
+                        .setName(TextComponent.translatable("sodium.dynamiclights.options.self"))
+                        .setTooltip(TextComponent.translatable("sodium.dynamiclights.options.self.desc"))
                         .setControl(TickBoxControl::new)
-                        .setBinding((options, value) -> {
-                                    DynamicLightsConfig.selfLightSource = value;
-                                },
+                        .setBinding((options, value) -> DynamicLightsConfig.selfLightSource = value,
                                 (options) -> DynamicLightsConfig.selfLightSource)
                         .build())
-                .add(OptionImpl.createBuilder(boolean.class, mixinsOptionsStorage)
-                        .setId(ResourceLocations.OPTIONS_ENTITIES)
-                        .setName(ComponentUtil.translatable("sodium.dynamiclights.options.entities"))
-                        .setTooltip(ComponentUtil.translatable("sodium.dynamiclights.options.entities.desc"))
+                .add(OptionImpl.createBuilder(Boolean.class, optionsStorage)
+                        .setId(OptionIdentifier.create(MOD_ID, "entities", Boolean.class))
+                        .setName(TextComponent.translatable("sodium.dynamiclights.options.entities"))
+                        .setTooltip(TextComponent.translatable("sodium.dynamiclights.options.entities.desc"))
                         .setControl(TickBoxControl::new)
-                        .setBinding((options, value) -> {
-                                    DynamicLightsConfig.entitiesLightSource = value;
-                                },
+                        .setBinding((options, value) -> DynamicLightsConfig.entitiesLightSource = value,
                                 (options) -> DynamicLightsConfig.entitiesLightSource)
                         .build())
-                .add(OptionImpl.createBuilder(boolean.class, mixinsOptionsStorage)
-                        .setId(ResourceLocations.OPTIONS_BLOCKENTITIES)
-                        .setName(ComponentUtil.translatable("sodium.dynamiclights.options.blockentities"))
-                        .setTooltip(ComponentUtil.translatable("sodium.dynamiclights.options.blockentities.desc"))
+                .add(OptionImpl.createBuilder(Boolean.class, optionsStorage)
+                        .setId(OptionIdentifier.create(MOD_ID, "blockentities", Boolean.class))
+                        .setName(TextComponent.translatable("sodium.dynamiclights.options.blockentities"))
+                        .setTooltip(TextComponent.translatable("sodium.dynamiclights.options.blockentities.desc"))
                         .setControl(TickBoxControl::new)
-                        .setBinding((options, value) -> {
-                                    DynamicLightsConfig.blockEntitiesLightSource = value;
-                                },
+                        .setBinding((options, value) -> DynamicLightsConfig.blockEntitiesLightSource = value,
                                 (options) -> DynamicLightsConfig.blockEntitiesLightSource)
                         .build())
-                .add(OptionImpl.createBuilder(boolean.class, mixinsOptionsStorage)
-                        .setId(ResourceLocations.OPTIONS_UNDERWATER)
-                        .setName(ComponentUtil.translatable("sodium.dynamiclights.options.underwater"))
-                        .setTooltip(ComponentUtil.translatable("sodium.dynamiclights.options.underwater.desc"))
+                .add(OptionImpl.createBuilder(Boolean.class, optionsStorage)
+                        .setId(OptionIdentifier.create(MOD_ID, "underwater", Boolean.class))
+                        .setName(TextComponent.translatable("sodium.dynamiclights.options.underwater"))
+                        .setTooltip(TextComponent.translatable("sodium.dynamiclights.options.underwater.desc"))
                         .setControl(TickBoxControl::new)
-                        .setBinding((options, value) -> {
-                                    DynamicLightsConfig.waterSensitiveCheck = value;
-                                },
+                        .setBinding((options, value) -> DynamicLightsConfig.waterSensitiveCheck = value,
                                 (options) -> DynamicLightsConfig.waterSensitiveCheck)
                         .build())
-                .add(OptionImpl.createBuilder(ExplosiveLightingMode.class, mixinsOptionsStorage)
-                        .setId(ResourceLocations.OPTIONS_TNT)
-                        .setName(ComponentUtil.translatable("sodium.dynamiclights.options.tnt"))
-                        .setTooltip(ComponentUtil.translatable("sodium.dynamiclights.options.tnt.desc",
-                                ExplosiveLightingMode.OFF.getTranslationComponent().getFormattedText(),
-                                ExplosiveLightingMode.SIMPLE.getTranslationComponent().getFormattedText(),
-                                ExplosiveLightingMode.FANCY.getTranslationComponent().getFormattedText()
-                        ))
-                        .setControl(option -> new CyclingControl<>(option, ExplosiveLightingMode.class, new ITextComponent[]{
-                                ExplosiveLightingMode.OFF.getTranslationComponent(),
-                                ExplosiveLightingMode.SIMPLE.getTranslationComponent(),
-                                ExplosiveLightingMode.FANCY.getTranslationComponent(),
+                .add(OptionImpl.createBuilder(ExplosiveLightingMode.class, optionsStorage)
+                        .setId(OptionIdentifier.create(MOD_ID, "tnt", ExplosiveLightingMode.class))
+                        .setName(TextComponent.translatable("sodium.dynamiclights.options.tnt"))
+                        .setTooltip(TextComponent.translatable("sodium.dynamiclights.options.tnt.desc"))
+                        .setControl(option -> new CyclingControl<>(option, ExplosiveLightingMode.class, new TextComponent[]{
+                                TextComponent.translatable(ExplosiveLightingMode.OFF.getTranslationComponent().getKey()),
+                                TextComponent.translatable(ExplosiveLightingMode.SIMPLE.getTranslationComponent().getKey()),
+                                TextComponent.translatable(ExplosiveLightingMode.FANCY.getTranslationComponent().getKey()),
                         }))
-                        .setBinding((options, value) -> {
-                                    DynamicLightsConfig.tntLightingMode = (value);
-                                },
+                        .setBinding((options, value) -> DynamicLightsConfig.tntLightingMode = (value),
                                 (options) -> DynamicLightsConfig.tntLightingMode)
                         .build())
-                .add(OptionImpl.createBuilder(ExplosiveLightingMode.class, mixinsOptionsStorage)
-                        .setId(ResourceLocations.OPTIONS_CREEPER)
-                        .setName(ComponentUtil.translatable("sodium.dynamiclights.options.creeper"))
-                        .setTooltip(ComponentUtil.translatable("sodium.dynamiclights.options.creeper.desc",
-                                ExplosiveLightingMode.OFF.getTranslationComponent().getFormattedText(),
-                                ExplosiveLightingMode.SIMPLE.getTranslationComponent().getFormattedText(),
-                                ExplosiveLightingMode.FANCY.getTranslationComponent().getFormattedText()
-                        ))
-                        .setControl(option -> new CyclingControl<>(option, ExplosiveLightingMode.class, new ITextComponent[]{
-                                ExplosiveLightingMode.OFF.getTranslationComponent(),
-                                ExplosiveLightingMode.SIMPLE.getTranslationComponent(),
-                                ExplosiveLightingMode.FANCY.getTranslationComponent(),
+                .add(OptionImpl.createBuilder(ExplosiveLightingMode.class, optionsStorage)
+                        .setId(OptionIdentifier.create(MOD_ID, "creeper", ExplosiveLightingMode.class))
+                        .setName(TextComponent.translatable("sodium.dynamiclights.options.creeper"))
+                        .setTooltip(TextComponent.translatable("sodium.dynamiclights.options.creeper.desc"))
+                        .setControl(option -> new CyclingControl<>(option, ExplosiveLightingMode.class, new TextComponent[]{
+                                TextComponent.translatable(ExplosiveLightingMode.OFF.getTranslationComponent().getKey()),
+                                TextComponent.translatable(ExplosiveLightingMode.SIMPLE.getTranslationComponent().getKey()),
+                                TextComponent.translatable(ExplosiveLightingMode.FANCY.getTranslationComponent().getKey()),
                         }))
-                        .setBinding((options, value) -> {
-                                    DynamicLightsConfig.creeperLightingMode = (value);
-                                },
+                        .setBinding((options, value) -> DynamicLightsConfig.creeperLightingMode = (value),
                                 (options) -> DynamicLightsConfig.creeperLightingMode)
                         .build())
                 .build());
 
-        OptionIdentifier<Void> id = OptionIdentifier.create("celeritasdynamiclights", null);
-        ITextComponent name = ComponentUtil.translatable("sodium.dynamiclights.options.page");
+        OptionIdentifier<Void> pageId = OptionIdentifier.create(MOD_ID, "page");
+        TextComponent pageName = TextComponent.translatable("sodium.dynamiclights.options.page");
 
-        return new OptionPage(id, name, ImmutableList.copyOf(groups));
-
+        return new OptionPage(pageId, pageName, ImmutableList.copyOf(groups));
     }
 }

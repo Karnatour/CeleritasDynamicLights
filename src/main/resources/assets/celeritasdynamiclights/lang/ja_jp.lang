@@ -1,0 +1,43 @@
+#PARSE_ESCAPES
+sodiumdynamiclights.menu.light_sources=動的光源
+sodiumdynamiclights.menu.title=SodiumDynamicLights 設定
+sodiumdynamiclights.menu.canvas.1=Canvas 使用時はエンティティの動的ライティングを無効にすることを推奨します！
+sodiumdynamiclights.menu.canvas.2=Canvas での動的ライティングは現在パフォーマンスに大きく影響します！
+sodiumdynamiclights.menu.tabs.general=一般
+sodiumdynamiclights.option.light_sources.block_entities=ブロックエンティティ
+sodiumdynamiclights.option.light_sources.entities=エンティティ
+sodiumdynamiclights.option.light_sources.self=一人称視点
+sodiumdynamiclights.option.light_sources.water_sensitive_check=水感知チェック
+sodiumdynamiclights.option.mode=動的ライティング
+sodiumdynamiclights.tooltip.block_entities=ブロックエンティティの動的ライティングを有効にします。
+sodiumdynamiclights.tooltip.creeper_lighting=クリーパーの動的ライティングモードを設定します。\n- %s 無効にします。\n- %s 一定の明るさに設定します。\n- %s 動的な明るさに設定します。
+sodiumdynamiclights.tooltip.entities=エンティティの動的ライティングを有効にします。注: プレイヤーは常に有効です。
+sodiumdynamiclights.tooltip.mode.1=動的ライティングを有効にします。有効な場合、松明を持つプレイヤーが周囲を照らします。
+sodiumdynamiclights.tooltip.mode.2=%s と %s は少し遅延しますが、光の更新を最小限に抑えます。
+sodiumdynamiclights.tooltip.mode.3=%s は滑らかな動的ライティングです。
+sodiumdynamiclights.tooltip.self_light_source=一人称視点での動的ライティングを有効にします。独自の動的ライティングを持つシェーダーを使用している場合は無効を推奨します。
+sodiumdynamiclights.tooltip.tnt_lighting=TNT の動的ライティングモードを設定します。\n- %s 無効にします。\n- %s 一定の明るさに設定します。\n- %s 動的な明るさに設定します。
+sodiumdynamiclights.tooltip.water_sensitive=水感知光源チェックを有効にします。これにより、水中では一部のアイテムが光を放たなくなります。
+
+sodium.dynamiclights.options.page=動的ライティング
+sodium.dynamiclights.options.mode=品質モード
+sodium.dynamiclights.options.mode.desc=動的光源の更新頻度を設定します
+sodium.dynamiclights.options.self=手持ちライティング
+sodium.dynamiclights.options.self.desc=一人称視点での動的ライティングを有効にします。独自の動的ライティングを持つシェーダーを使用している場合は無効を推奨します。
+sodium.dynamiclights.options.entities=エンティティの動的ライティング
+sodium.dynamiclights.options.entities.desc=有効にすると、モブやドロップアイテムなどのエンティティが動的に光ります。
+sodium.dynamiclights.options.blockentities=ブロックエンティティの動的ライティング
+sodium.dynamiclights.options.blockentities.desc=有効にすると、ブロックエンティティが動的に光ります。
+sodium.dynamiclights.options.underwater=水中で消灯
+sodium.dynamiclights.options.underwater.desc=水感知光源チェックを有効にします。これにより、水中では一部のアイテムが光を放たなくなります。
+sodium.dynamiclights.options.tnt=TNT ライティング品質
+sodium.dynamiclights.options.tnt.desc=TNT の動的ライティングモードを設定します。\n- %s 無効にします。\n- %s 一定の明るさに設定します。\n- %s 動的な明るさに設定します。
+sodium.dynamiclights.options.creeper=クリーパー ライティング品質
+sodium.dynamiclights.options.creeper.desc=クリーパーの動的ライティングモードを設定します。\n- %s 無効にします。\n- %s 一定の明るさに設定します。\n- %s 動的な明るさに設定します。
+
+sodium.dynamiclights.options.value.off=オフ
+sodium.dynamiclights.options.value.slow=低速
+sodium.dynamiclights.options.value.fast=高速
+sodium.dynamiclights.options.value.realtime=リアルタイム
+sodium.dynamiclights.options.value.simple=シンプル
+sodium.dynamiclights.options.value.fancy=高品質

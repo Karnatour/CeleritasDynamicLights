@@ -15,7 +15,7 @@ import toni.sodiumdynamiclights.ExplosiveLightingMode;
 
 import java.util.HashMap;
 
-@Config(modid = "celeritasdynamiclights", name = "Celeritas Dynamic Lights")
+@Config(modid = "celeritasdynamiclights")
 public class DynamicLightsConfig {
     public static DynamicLightsMode dynamicLightsMode = DynamicLightsMode.REALTIME;
 

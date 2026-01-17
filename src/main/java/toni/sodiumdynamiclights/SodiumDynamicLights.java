@@ -55,7 +55,7 @@ import java.util.function.Predicate;
  * @since 1.0.0
  */
 
-@Mod(modid = "celeritasdynamiclights", name = "Celeritas Dynamic Lights", version = "1.2.7", clientSideOnly = true, acceptableRemoteVersions = "*")
+@Mod(modid = "celeritasdynamiclights", name = "Celeritas Dynamic Lights", version = "1.2.8", clientSideOnly = true, acceptableRemoteVersions = "*")
 public class SodiumDynamicLights {
     public static final Logger LOGGER = LogManager.getLogger("Celeritas Dynamic Lights");
     @Mod.Instance

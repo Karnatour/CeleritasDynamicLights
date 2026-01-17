@@ -15,7 +15,7 @@ import java.util.List;
 
 public class DynamicLightsCeleritasPage {
 
-    private static final MinecraftOptionsStorage optionsStorage = new MinecraftOptionsStorage();
+    private static final CeleritasDynamicLightsOptionsStorage optionsStorage = new CeleritasDynamicLightsOptionsStorage();
 
     public static OptionPage celeritasDynamicLights() {
         final List<OptionGroup> groups = new ArrayList<>();

@@ -25,7 +25,7 @@ dependencies {
     }
 
     compileOnly('curse.maven:codechicken-lib-cre-1328922:6898525')
-    compileOnly('maven.modrinth:fluidlogged-api:3.0.2')
+    compileOnly('curse.maven:fluidlogged-api-485654:7418423')
 
 
     // Example - Dependency descriptor:

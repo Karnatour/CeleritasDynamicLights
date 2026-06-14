@@ -10,6 +10,7 @@
   "setSourceFile": true,
   "server": [],
   "client": [
-    "mod.codechickenlib.LightMatrixMixin"
+    "mod.codechickenlib.LightMatrixMixin",
+    "mod.rlfoliage.ModelRendererMixin"
   ]
 }

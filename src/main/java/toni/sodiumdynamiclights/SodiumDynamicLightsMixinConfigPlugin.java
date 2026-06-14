@@ -23,6 +23,7 @@ public class SodiumDynamicLightsMixinConfigPlugin implements IMixinConfigPlugin 
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
         return switch (mixinClassName.split("\\.")[4]) {
             case "codechickenlib" -> Loader.isModLoaded("codechickenlib");
+            case "rlfoliage" -> Loader.isModLoaded("rlfoliage");
             default -> true;
         };
     }

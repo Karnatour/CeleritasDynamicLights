@@ -25,7 +25,7 @@ public class StateImplementationMixin {
         if (!DynamicLightsConfig.dynamicLightsMode.isEnabled()) return;
 
         if (Minecraft.getMinecraft().gameSettings.ambientOcclusion > 0) {
-            if (self.isOpaqueCube()) return;
+            if (self.isOpaqueCube() && self.getLightValue() == 0) return;
         }
 
         int vanillaLight = cir.getReturnValue();

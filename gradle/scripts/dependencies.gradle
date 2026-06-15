@@ -28,7 +28,6 @@ dependencies {
 
     modCompileOnly('curse.maven:codechicken-lib-cre-1328922:6898525')
     modCompileOnly('curse.maven:fluidlogged-api-485654:7418423')
-
     modCompileOnly('curse.maven:rlfoliage-970462:7645701')
     modCompileOnly('curse.maven:fermiumbooter-968474:7279112')
 

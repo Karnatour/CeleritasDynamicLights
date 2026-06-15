@@ -20,13 +20,7 @@ public class StateImplementationMixin {
 
     @Inject(method = "getPackedLightmapCoords", at = @At("RETURN"), cancellable = true)
     private void onGetPackedLightmapCoords(IBlockAccess world, BlockPos pos, CallbackInfoReturnable<Integer> cir) {
-        IBlockState self = (IBlockState) this;
-
         if (!DynamicLightsConfig.dynamicLightsMode.isEnabled()) return;
-
-        if (Minecraft.getMinecraft().gameSettings.ambientOcclusion > 0) {
-            if (self.isOpaqueCube() && self.getLightValue() == 0) return;
-        }
 
         int vanillaLight = cir.getReturnValue();
         int dynamicLight = SodiumDynamicLights.get().getLightmapWithDynamicLight(pos, vanillaLight);

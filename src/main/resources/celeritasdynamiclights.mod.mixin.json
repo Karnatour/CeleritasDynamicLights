@@ -11,6 +11,11 @@
   "server": [],
   "client": [
     "mod.codechickenlib.LightMatrixMixin",
-    "mod.rlfoliage.ModelRendererMixin"
+    "mod.rlfoliage.ModelRendererMixin",
+    "mod.galacticraft.GCEntityClientPlayerMPMixin",
+    "mod.galacticraft.EntityLanderBaseMixin",
+    "mod.galacticraft.EntitySpaceshipBaseMixin",
+    "mod.galacticraft.GCPlayerBaseSPMixin",
+    "mod.galacticraft.GCEntityOtherPlayerMPMixin"
   ]
 }

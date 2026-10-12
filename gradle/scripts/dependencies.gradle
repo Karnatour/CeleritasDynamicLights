@@ -24,13 +24,13 @@ dependencies {
     if (propertyBool('enable_lwjglx')) {
         compileOnly "com.cleanroommc:lwjglx:1.0.0"
     }
-    modImplementation 'curse.maven:hei-557549:6187146' // Use for mod Mixin example
 
     modCompileOnly('curse.maven:codechicken-lib-cre-1328922:6898525')
     modCompileOnly('curse.maven:fluidlogged-api-485654:7418423')
     modCompileOnly('curse.maven:rlfoliage-970462:7645701')
     modCompileOnly('curse.maven:fermiumbooter-968474:7279112')
     modCompileOnly('curse.maven:galacticraft-legacy-564236:6364107')
+    modCompileOnly "curse.maven:actinium-1-12-2-optimization-1650442:8981413"
 
     compileOnly(files("libs/celeritas-forge-mc12.2-2.4.0-dev.jar"))
 

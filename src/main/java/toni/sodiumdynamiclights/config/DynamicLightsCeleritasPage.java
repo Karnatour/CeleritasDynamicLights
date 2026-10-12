@@ -2,25 +2,47 @@ package toni.sodiumdynamiclights.config;
 
 import com.google.common.collect.ImmutableList;
 import org.embeddedt.embeddium.impl.gui.framework.TextComponent;
+import org.embeddedt.embeddium.impl.gui.framework.TextFormattingStyle;
 import org.taumc.celeritas.api.options.OptionIdentifier;
 import org.taumc.celeritas.api.options.control.CyclingControl;
 import org.taumc.celeritas.api.options.control.TickBoxControl;
 import org.taumc.celeritas.api.options.structure.*;
-import org.taumc.celeritas.impl.gui.MinecraftOptionsStorage;
 import toni.sodiumdynamiclights.DynamicLightsMode;
 import toni.sodiumdynamiclights.ExplosiveLightingMode;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class DynamicLightsCeleritasPage {
 
     private static final CeleritasDynamicLightsOptionsStorage optionsStorage = new CeleritasDynamicLightsOptionsStorage();
 
+    private static TextComponent name(DynamicLightsMode mode) {
+        return TextComponent.translatable(mode.getTranslationKey())
+                .withStyle(TextFormattingStyle.valueOf(mode.getFormatting().name()));
+    }
+
+    private static TextComponent name(ExplosiveLightingMode mode) {
+        return TextComponent.translatable(mode.getTranslationKey())
+                .withStyle(TextFormattingStyle.valueOf(mode.getFormatting().name()));
+    }
+
     public static OptionPage celeritasDynamicLights() {
         final List<OptionGroup> groups = new ArrayList<>();
 
         final String MOD_ID = "celeritasdynamiclights";
+
+        final TextComponent[] modeNames = Arrays.stream(DynamicLightsMode.values())
+                .map(DynamicLightsCeleritasPage::name)
+                .toArray(TextComponent[]::new);
+        final TextComponent[] explosiveNames = Arrays.stream(ExplosiveLightingMode.values())
+                .map(DynamicLightsCeleritasPage::name)
+                .toArray(TextComponent[]::new);
+
+        final TextComponent off = explosiveNames[ExplosiveLightingMode.OFF.ordinal()];
+        final TextComponent simple = explosiveNames[ExplosiveLightingMode.SIMPLE.ordinal()];
+        final TextComponent fancy = explosiveNames[ExplosiveLightingMode.FANCY.ordinal()];
 
         groups.add(OptionGroup.createBuilder()
                 .setId(OptionIdentifier.create(MOD_ID, "common"))
@@ -28,7 +50,7 @@ public class DynamicLightsCeleritasPage {
                         .setId(OptionIdentifier.create(MOD_ID, "mode", DynamicLightsMode.class))
                         .setName(TextComponent.translatable("sodium.dynamiclights.options.mode"))
                         .setTooltip(TextComponent.translatable("sodium.dynamiclights.options.mode.desc"))
-                        .setControl(option -> new CyclingControl<>(option, DynamicLightsMode.class))
+                        .setControl(option -> new CyclingControl<>(option, DynamicLightsMode.class, modeNames))
                         .setBinding((options, value) -> DynamicLightsConfig.dynamicLightsMode = value,
                                 (options) -> DynamicLightsConfig.dynamicLightsMode)
                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
@@ -69,22 +91,18 @@ public class DynamicLightsCeleritasPage {
                         .setId(OptionIdentifier.create(MOD_ID, "tnt", ExplosiveLightingMode.class))
                         .setName(TextComponent.translatable("sodium.dynamiclights.options.tnt"))
                         .setTooltip(TextComponent.translatable("sodium.dynamiclights.options.tnt.desc",
-                                ExplosiveLightingMode.OFF.getLocalizedName(),
-                                ExplosiveLightingMode.SIMPLE.getLocalizedName(),
-                                ExplosiveLightingMode.FANCY.getLocalizedName()))
-                        .setControl(option -> new CyclingControl<>(option, ExplosiveLightingMode.class))
-                        .setBinding((options, value) -> DynamicLightsConfig.tntLightingMode = (value),
+                                off, simple, fancy))
+                        .setControl(option -> new CyclingControl<>(option, ExplosiveLightingMode.class, explosiveNames))
+                        .setBinding((options, value) -> DynamicLightsConfig.tntLightingMode = value,
                                 (options) -> DynamicLightsConfig.tntLightingMode)
                         .build())
                 .add(OptionImpl.createBuilder(ExplosiveLightingMode.class, optionsStorage)
                         .setId(OptionIdentifier.create(MOD_ID, "creeper", ExplosiveLightingMode.class))
                         .setName(TextComponent.translatable("sodium.dynamiclights.options.creeper"))
                         .setTooltip(TextComponent.translatable("sodium.dynamiclights.options.creeper.desc",
-                                ExplosiveLightingMode.OFF.getLocalizedName(),
-                                ExplosiveLightingMode.SIMPLE.getLocalizedName(),
-                                ExplosiveLightingMode.FANCY.getLocalizedName()))
-                        .setControl(option -> new CyclingControl<>(option, ExplosiveLightingMode.class))
-                        .setBinding((options, value) -> DynamicLightsConfig.creeperLightingMode = (value),
+                                off, simple, fancy))
+                        .setControl(option -> new CyclingControl<>(option, ExplosiveLightingMode.class, explosiveNames))
+                        .setBinding((options, value) -> DynamicLightsConfig.creeperLightingMode = value,
                                 (options) -> DynamicLightsConfig.creeperLightingMode)
                         .build())
                 .build());

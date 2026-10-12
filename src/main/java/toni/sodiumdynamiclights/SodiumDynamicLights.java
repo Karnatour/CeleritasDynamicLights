@@ -37,6 +37,7 @@ import org.apache.logging.log4j.Logger;
 import org.taumc.celeritas.api.OptionGUIConstructionEvent;
 import org.taumc.celeritas.api.eventbus.EmbeddiumEvent;
 import toni.sodiumdynamiclights.accessor.WorldRendererAccessor;
+import toni.sodiumdynamiclights.config.ActiniumOptionsListener;
 import toni.sodiumdynamiclights.config.CeleritasOptionsListener;
 import toni.sodiumdynamiclights.config.ConfigEventHandler;
 import toni.sodiumdynamiclights.config.DynamicLightsConfig;
@@ -55,7 +56,7 @@ import java.util.function.Predicate;
  * @since 1.0.0
  */
 
-@Mod(modid = "celeritasdynamiclights", name = "Celeritas Dynamic Lights", version = "1.2.10", clientSideOnly = true, acceptableRemoteVersions = "*")
+@Mod(modid = "celeritasdynamiclights", name = "Celeritas Dynamic Lights", version = "1.2.11", clientSideOnly = true, acceptableRemoteVersions = "*")
 public class SodiumDynamicLights {
     public static final Logger LOGGER = LogManager.getLogger("Celeritas Dynamic Lights");
     @Mod.Instance
@@ -79,6 +80,20 @@ public class SodiumDynamicLights {
                     LOGGER.error("Celeritas version is too old use 2.4.0 or newer");
                 } else {
                     LOGGER.error("Unable to check if Celeritas is up-to-date", t);
+                }
+            }
+        }
+        if (Loader.isModLoaded("actinium")) {
+            try {
+                Class.forName("dhj.embeddedt.embeddium.api.OptionGUIConstructionEvent");
+                dhj.embeddedt.embeddium.api.OptionGUIConstructionEvent.BUS.addListener(ActiniumOptionsListener::onActiniumOptionsConstruct);
+                LOGGER.info("Actinium Celeritas detected, setting fastBlockRenderer property to true");
+                System.setProperty("celeritas.useVintageFastBlockRenderer", "true");
+            } catch (Throwable t) {
+                if (t instanceof NoClassDefFoundError) {
+                    LOGGER.error("Actinium celeritas version is too old use 2.4.0 or newer");
+                } else {
+                    LOGGER.error("Unable to check if Actinium Celeritas is up-to-date", t);
                 }
             }
         }
